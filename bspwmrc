@@ -113,8 +113,8 @@ xfce4-power-manager &
 # Fix cursor
 xsetroot -cursor_name left_ptr
 
-# Restore wallpaper
-bash $HOME/.fehbg
+
+#bash $HOME/.fehbg
 
 # Start mpd
 exec mpd &
@@ -127,3 +127,12 @@ bspfloat &
 
 ## Adjust backlight (AMD)
 #blight -d amdgpu_bl0 set 15%
+# Restore wallpaper
+gwpp="$HOME/.config/bspwm/gwpp"
+
+killall xwinwrap
+if [[ ! -f "$gwpp" ]]; then
+	bash $HOME/.fehbg
+else
+	bash $gwpp
+fi

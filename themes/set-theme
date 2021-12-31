@@ -5,11 +5,24 @@
 CFG="$HOME/.config"
 BSP="$HOME/.config/bspwm"
 XRES="$HOME/.Xresources.d"
+wpp="$HOME/.config/bspwm/gwpp"
 
 ## Set Style
 set_style () {
 	# apply wallpaper
 	feh --bg-scale "$BSP"/wallpapers/${1}
+	if [[ ${1} == *.gif* ]]; then
+
+		monitor_resolution=$(xrandr | grep '\bconnected\b' | grep -oP '\d+x\d+')
+        gif_resolution=$(file "$BSP/wallpapers/${1}" | grep -oP '\d+\ x\ \d+' | tr -d ' ')
+        if [[ $monitor_resolution != $gif_resolution ]]; then
+            img=${1%".gif"}
+            gifsicle "$BSP/wallpapers/${img}-full.gif" --resize $monitor_resolution > "$BSP/wallpapers/${1}"
+        fi
+		echo "xwinwrap -g $monitor_resolution+0+20 -fdt -ni -b -nf -- gifview -w WID $BSP/wallpapers/${1} -a" > $wpp
+	else
+		rm $wpp
+	fi
 	
 	# apply color-scheme
 	cat "$BSP"/themes/${2} > "$XRES"/colors
