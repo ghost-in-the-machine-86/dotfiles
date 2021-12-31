@@ -1,0 +1,20 @@
+*foreground: #BA969B
+*background: #303535
+
+! Colors 0-15.
+*color0:  #303535
+*color1:  #BA969B
+*color2:  #98B3C8
+*color3:  #D4BC6C
+*color4:  #98B3C8
+*color5:  #CC9498
+*color6:  #3184BD
+*color7:  #3C74A4
+*color8:  #D4BC6C
+*color9:  #93A0A9
+*color10: #3C74A4
+*color11: #D4BC6C
+*color12: #93A0A9
+*color13: #CC9498
+*color14: #3C74A4
+*color15: #3184BD

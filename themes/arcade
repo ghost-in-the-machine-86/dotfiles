@@ -1,0 +1,20 @@
+*.foreground:       #97DDFC
+*.background:       #070707
+
+! Colors 0-15.
+*.color0: #070707
+*.color1: #C139E7
+*.color2: #0C4693
+*.color3: #0C4693
+*.color4: #D64ABC
+*.color5: #FF69FD
+*.color6: #4898E6
+*.color7: #97DDFC
+*.color8: #DCD5C4
+*.color9: #070707
+*.color10: #4898E6
+*.color11: #C139E7
+*.color12: #D64ABC
+*.color13: #FF69FD
+*.color14: #4898E6
+*.color15: #97DDFC
