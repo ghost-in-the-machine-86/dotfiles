@@ -143,3 +143,8 @@ element selected.active {
     background-color:               @selected;
     color:                          @foreground;
 }
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
