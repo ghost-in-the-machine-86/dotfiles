@@ -331,10 +331,9 @@ type = internal/date
 
 interval = 1.0
 
-time = %I:%M %p
-time-alt = %A, %d %B %Y
+time = %H:%M:%S
 
-format = <label>
+format = %{A1:~/.config/bspwm/rofi/bin/calendar:}<label>%{A}
 format-prefix = " "
 format-prefix-font = 2
 format-prefix-foreground = ${color.RED}
