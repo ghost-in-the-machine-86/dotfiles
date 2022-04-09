@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+## Apply themes in Bspwm
+
+CFG="$HOME/.config"
+BSP="$HOME/.config/bspwm"
+XRES="$HOME/.Xresources.d"
+wpp="$HOME/.config/bspwm/gwpp"
+
+## Set Style
+set_style () {
+	# apply wallpaper
+	feh --bg-scale "$BSP"/wallpapers/${1}
+	if [[ ${1} == *.gif* ]]; then
+
+		monitor_resolution=$(xrandr | grep '\bconnected\b' | grep -oP '\d+x\d+')
+        gif_resolution=$(file "$BSP/wallpapers/${1}" | grep -oP '\d+\ x\ \d+' | tr -d ' ')
+        if [[ $monitor_resolution != $gif_resolution ]]; then
+            img=${1%".gif"}
+            gifsicle "$BSP/wallpapers/${img}-full.gif" --resize $monitor_resolution > "$BSP/wallpapers/${1}"
+        fi
+		echo "xwinwrap -g $monitor_resolution+0+20 -fdt -ni -b -nf -- gifview -w WID $BSP/wallpapers/${1} -a" > $wpp
+	else
+		rm $wpp
+	fi
+	
+	# apply color-scheme
+	cat "$BSP"/themes/${2} > "$XRES"/colors
+	
+	# set gtk theme, icons and cursor
+	if [[ `pidof xsettingsd` ]]; then
+		sed -i -e "s|Net/ThemeName .*|Net/ThemeName \"$3\"|g" ${HOME}/.xsettingsd
+		sed -i -e "s|Net/IconThemeName .*|Net/IconThemeName \"$4\"|g" ${HOME}/.xsettingsd
+		sed -i -e "s|Gtk/CursorThemeName .*|Gtk/CursorThemeName \"$5\"|g" ${HOME}/.xsettingsd
+	else
+		sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=\"$3\"/g" ${HOME}/.gtkrc-2.0
+		sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=\"$4\"/g" ${HOME}/.gtkrc-2.0
+		sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=\"$5\"/g" ${HOME}/.gtkrc-2.0
+		
+		sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=$3/g" ${CFG}/gtk-3.0/settings.ini
+		sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=$4/g" ${CFG}/gtk-3.0/settings.ini
+		sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=$5/g" ${CFG}/gtk-3.0/settings.ini
+	fi
+	
+	# reload config
+	bspc wm -r
+}
+
+set_style "${1}" "${2}" "${3}" "${4}" "${5}"
