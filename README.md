@@ -9,3 +9,10 @@ Custom [Archcraft-bspwm](https://github.com/archcraft-os/archcraft-bspwm) with g
 * [polybar](https://github.com/polybar/polybar)
 * [xwinwrap]()
 * [gifsicle](https://github.com/kohler/gifsicle)
+### Themes
+##### Arcade
+![Arcade](https://thumbs.gfycat.com/InsecureWarmheartedFrigatebird-size_restricted.gif)
+##### Air
+![Air](https://thumbs.gfycat.com/NextSlimHochstettersfrog-size_restricted.gif)
+##### Underground
+![Underground](https://thumbs.gfycat.com/SeriousPoorCivet-size_restricted.gif)
